@@ -1,0 +1,19 @@
+{
+  "name": "nodeapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mandeep",
+  "license": "ISC",
+  
+  "dependencies": {
+    "express": "*",
+    "path": "*"
+  },
+  "engines": {
+    "node": "7.7.4"
+  }
+}

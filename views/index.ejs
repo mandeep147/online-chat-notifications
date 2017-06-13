@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="onlinechat">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheet/style.css">
+    <link rel="stylesheet" href="stylesheet/font-awesome.css">
+
+    <script src= "/js/angular.min.js"></script>
+    <script src="/js/angular-animate.min.js"></script>
+    <script src="/js/angular-sanitize.min.js"></script>
+    <script src="/js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script src="/js/config.js"> </script>
+    <script src="/js/chatnotification.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/2.2.0/angularfire.min.js"></script>
+
+</head>
+<body >
+<div class="container">
+    <h1> Welcome to online chat!! </h1>
+    <button type="button" class="btn btn-default btn-sm tab" id='firsttab' ng-click="active = 1">window 1</button>
+    <button type="button" class="btn btn-default btn-sm tab" id='secondtab' ng-click="active = 2">window 2</button>
+
+    <br>
+
+    <br>
+    <uib-tabset active="active">
+
+        <uib-tab index="$index + 1"  heading="window 1">
+            <br> <br>
+            <div class="container" ng-controller="onlinechatController">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">window 1</div>
+                    <div class="panel-body">
+
+                        <button ng-if="name==undefined" class="btn btn-default loginBtn loginBtn--facebook" ng-click="authorizeFBLogin ()"> Log in </button>
+                        <p ng-if="name!==undefined"> <strong> {{name}} </strong> is logged in</p>
+                        <hr>
+                        <div   class="clearfix" ng-repeat="m in messages">
+                            <b class="message">{{m.message}}</b>&nbsp;&nbsp;&nbsp;
+                            <span class="senders">- {{m.date | date:'MMM d, h:mma'}}</span><br>
+                            <span class="senders">{{m.name}}</span> <hr>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Type message" ng-model="messageText">
+                        </div>
+                        <button ng-disabled="name==undefined" type="submit" class="btn btn-default" ng-click="send(message)">click to send</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </uib-tab>
+
+        <uib-tab index="$index + 2"  heading="window 2">
+            <br> <br>
+            <div class="container" ng-controller="onlinechatController2">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">window 2</div>
+                    <div class="panel-body">
+
+                        <button ng-if="name==undefined" class="btn btn-default loginBtn loginBtn--facebook" ng-click="authorizeFBLogin ()"> Log in </button>
+                        <p ng-if="name!==undefined"> <strong> {{name}} </strong> is logged in</p>
+                        <hr>
+                        <p ng-repeat="m in messages2"> <b>{{m.message}}</b>&nbsp;&nbsp;&nbsp; -&nbsp;  {{m.date | date:'medium'}}</p>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Type message" ng-model="messageText2">
+                        </div>
+                        <button type="submit" class="btn btn-default" ng-click="sendmessage(message)">click to send</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </uib-tab>
+    </uib-tabset>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+
+</body>
+</html>
